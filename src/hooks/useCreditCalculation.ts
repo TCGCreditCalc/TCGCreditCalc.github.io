@@ -52,8 +52,17 @@ export function useCreditCalculation(initialConfig: MethodConfig) {
     localStorage.setItem(`tcg-calc-config-${config.id}`, JSON.stringify(config));
   }, [config]);
 
+  const [debouncedConfig, setDebouncedConfig] = useState<MethodConfig>(config);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedConfig(config);
+    }, 250);
+    return () => clearTimeout(timer);
+  }, [config]);
+
   const results = useMemo(() => {
-    const { skillType, startLevel, targetLevel, xpPerHour, secondarySkill, monster } = config;
+    const { skillType, startLevel, targetLevel, xpPerHour, secondarySkill, monster } = debouncedConfig;
     
     // Ensure logical bounds
     const safeStartLevel = Math.max(1, Math.min(startLevel, 99));
@@ -259,7 +268,7 @@ export function useCreditCalculation(initialConfig: MethodConfig) {
         hpXpGained: Math.round(currentHpXp - experienceForLevel(startHpLevel)),
       }
     };
-  }, [config]);
+  }, [debouncedConfig]);
 
   return {
     config,
