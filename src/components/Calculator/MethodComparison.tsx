@@ -261,7 +261,7 @@ export const MethodComparison: React.FC = () => {
       <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
         <div style={{ fontSize: '0.85rem', color: '#888', textTransform: 'uppercase', letterSpacing: '1px' }}>Estimated Credits</div>
         <div style={{ fontSize: '2.5rem', fontWeight: 'bold', color: '#f39c12', lineHeight: '1.2' }}>{method.results.finalCredits.toLocaleString()}</div>
-        <div style={{ fontSize: '1rem', color: '#82ca9d' }}>~{Math.round(method.results.finalCredits / Math.max(1, method.results.hoursTaken)).toLocaleString()} credits/hr</div>
+        <div style={{ fontSize: '1rem', color: '#82ca9d' }}>~{Math.round(method.results.hoursTaken > 0 ? method.results.finalCredits / method.results.hoursTaken : 0).toLocaleString()} credits/hr</div>
       </div>
       
       <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.9rem' }}>
