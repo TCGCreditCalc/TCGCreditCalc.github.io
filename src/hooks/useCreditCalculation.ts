@@ -112,6 +112,7 @@ export function useCreditCalculation(initialConfig: MethodConfig) {
       level: safeStartLevel,
       totalCredits: 0,
       creditsPerHour: 0,
+      marginalCreditsPerHour: 0,
       packsPerHour: 0,
       totalXp: startXp,
     });
